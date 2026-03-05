@@ -4,10 +4,6 @@
   "description": "Generative AI playground showcasing LangChain.js v1 usage with TypeScript",
   "private": true,
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sinedied/langchainjs-playground"
-  },
   "scripts": {},
   "keywords": [
     "github-models",
@@ -18,14 +14,6 @@
     "playground",
     "llm"
   ],
-  "author": {
-    "name": "Yohan Lasorsa",
-    "url": "https://github.com/sinedied"
-  },
-  "homepage": "https://github.com/sinedied/gpt-oss-typescript-playground",
-  "bugs": {
-    "url": "https://github.com/sinedied/gpt-oss-typescript-playground/issues"
-  },
   "license": "MIT",
   "dependencies": {
     "@langchain/core": "^1.0.1",
@@ -33,6 +21,8 @@
     "@langchain/ollama": "^1.0.0",
     "@langchain/openai": "^1.0.0",
     "dotenv": "^17.2.3",
+    "express-error-toolkit": "^1.2.1",
+    "http-status-toolkit": "^2.0.0",
     "langchain": "^1.0.1",
     "zod": "^3.25.76"
   },
