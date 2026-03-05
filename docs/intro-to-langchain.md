@@ -1,4 +1,4 @@
-# Learn LangChain: The Complete Beginner-Friendly Guide
+# Learning LangChain: The Complete Beginner-Friendly Guide
 
 LangChain is a framework for building applications powered by **large language models (LLMs)**. It helps developers go beyond simple prompts and unlock structured, multi-step, and memory-enabled workflows with LLMs.
 
