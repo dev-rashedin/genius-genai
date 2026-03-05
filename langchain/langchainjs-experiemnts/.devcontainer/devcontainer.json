@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+  "name": "javascript",
+
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bullseye",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers-community/features/deno:1": {}
+  },
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "formulahendry.code-runner",
+        "ms-toolsai.jupyter",
+        "-denoland.vscode-deno"
+      ]
+    }
+  },
+
+  "postCreateCommand": "npm install -g tsx; deno jupyter --install; npm install",
+
+  // Set minimal host requirements for the container.
+  "hostRequirements": {
+    "memory": "16gb"
+  }
+}
