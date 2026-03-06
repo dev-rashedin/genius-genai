@@ -52,11 +52,7 @@ const getUserLocation = tool(
  *    Fixed model string to use proper OpenAI provider
  *    Increased timeout to 30s to avoid request timeouts
  */
-const model = await initChatModel("openai:gpt-4o-mini", {
-  temperature: 0.5,
-  timeout: 30, // seconds
-  maxTokens: 1000,
-});
+const model = await initChatModel("openai:gpt-4o-mini", );
 
 /**
  * 6️⃣ Structured response

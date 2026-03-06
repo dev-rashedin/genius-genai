@@ -4,7 +4,7 @@ import "dotenv/config"
 
 
 const getWeather = tool(
-  ({city}) => `It's always sunny in ${city}!`,
+  ({city}: {city: string}) => `It's always sunny in ${city}!`,
   {
     name: "get_weather",
     description: "Get the weather for a city",
