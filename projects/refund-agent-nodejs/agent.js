@@ -24,21 +24,22 @@ const getEmails = tool(
 
 const refund = tool(
   ({emails}) => {
-    // todo: access Gmail apis
-    return JSON.stringify(gmailEmails)
+    // todo: access backend apis
+      return '✅ All refunds processed succesfully!';
   },
   {
     name: "refund",
     description: "Process the refund for given email",
     schema: z.object({
-      emails: z.string(),
+      emails: z.array(z.string()).describe("The list of the emails which need to be refunded"),
     }),
   },
 );
 
+
 const agent = createAgent({
   model: "claude-sonnet-4-6",
-  tools: [getEmails],
+  tools: [getEmails, refund],
 });
 
 console.log(
