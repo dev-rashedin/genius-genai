@@ -21,6 +21,8 @@ const agent = createAgent({
 })
 
 
+// console.log(process.env.OPENAI_API_KEY)
+
 
 console.log(
   await agent.invoke({
