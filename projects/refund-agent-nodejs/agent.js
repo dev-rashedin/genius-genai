@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { createAgent } from "langchain";
 import { ChatGroq } from "@langchain/groq"
+import { gmailEmails } from "./constants/emails";
 
 const llm = new ChatGroq({
     model: "openai/gpt-oss-120b",
@@ -13,11 +14,25 @@ const llm = new ChatGroq({
 const getEmails = tool(
   () => {
     // todo: access Gmail apis
-    return ""
+    return JSON.stringify(gmailEmails)
   },
   {
     name: "get_emails",
     description: "Get the emails from inbox",
+  },
+);
+
+const refund = tool(
+  ({emails}) => {
+    // todo: access Gmail apis
+    return JSON.stringify(gmailEmails)
+  },
+  {
+    name: "refund",
+    description: "Process the refund for given email",
+    schema: z.object({
+      emails: z.string(),
+    }),
   },
 );
 

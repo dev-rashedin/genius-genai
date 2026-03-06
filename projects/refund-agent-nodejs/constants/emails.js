@@ -1,4 +1,4 @@
-const gmailEmails = {
+export const gmailEmails = {
   messages: [
     {
       id: '18c3f2a1b5d6e789',
