@@ -1,29 +1,33 @@
 import * as z from "zod";
 import { createAgent } from "langchain";
+import { ChatGroq } from "@langchain/groq"
 
-const ContactInfo = z.object({
-  name: z.string(),
-  email: z.string(),
-  phone: z.string(),
-});
+const llm = new ChatGroq({
+    model: "openai/gpt-oss-120b",
+    temperature: 0,
+    maxTokens: undefined,
+    maxRetries: 2,
+    // other params...
+})
+
+const getEmails = tool(
+  () => {
+    // todo: access Gmail apis
+    return ""
+  },
+  {
+    name: "get_emails",
+    description: "Get the emails from inbox",
+  },
+);
 
 const agent = createAgent({
-  model: "gpt-4.1",
-  responseFormat: ContactInfo,
+  model: "claude-sonnet-4-6",
+  tools: [getEmails],
 });
 
-const result = await agent.invoke({
-  messages: [
-    {
-      role: "user",
-      content: "Extract contact info from: John Doe, john@example.com, (555) 123-4567",
-    },
-  ],
-});
-
-console.log(result.structuredResponse);
-// {
-//   name: 'John Doe',
-//   email: 'john@example.com',
-//   phone: '(555) 123-4567'
-// }
+console.log(
+  await agent.invoke({
+    messages: [{ role: "user", content: "What's the weather in Tokyo?" }],
+  })
+);
