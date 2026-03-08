@@ -1,7 +1,7 @@
 import * as z from "zod";
-import { createAgent } from "langchain";
+import { createAgent, tool } from "langchain";
 import { ChatGroq } from "@langchain/groq"
-import { gmailEmails } from "./constants/emails";
+import { gmailEmails } from "./constants/emails.js";
 
 const llm = new ChatGroq({
     model: "openai/gpt-oss-120b",
@@ -38,12 +38,12 @@ const refund = tool(
 
 
 const agent = createAgent({
-  model: "claude-sonnet-4-6",
+  model: llm,
   tools: [getEmails, refund],
 });
 
 console.log(
   await agent.invoke({
-    messages: [{ role: "user", content: "What's the weather in Tokyo?" }],
+    messages: [{ role: "user", content: "Hey, is there any refund request? I wanted to refund them asap" }],
   })
 );

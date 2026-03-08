@@ -1,0 +1,38 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      express-error-toolkit:
+        specifier: ^1.2.1
+        version: 1.2.1
+      http-status-toolkit:
+        specifier: ^2.0.0
+        version: 2.0.0
+
+packages:
+
+  express-error-toolkit@1.2.1:
+    resolution: {integrity: sha512-86h3UhEaN/KLZ4MK31jTbTknURkNeD6Ur484IPWO5Ed59Yz56G6hIcpyAI6vVZMGr1cTK6Lr0Go/yNdO703VRA==}
+    engines: {node: '>=14'}
+
+  http-status-toolkit@1.0.3:
+    resolution: {integrity: sha512-tbsMokTrjbsebQl/enDJjqWqXNDM4JB+ABqF3J43HOG5LrMhqSd8blHv4y0RxdsGtLX02tQd/CInBKBuoaAp4w==}
+
+  http-status-toolkit@2.0.0:
+    resolution: {integrity: sha512-2uA7ZIcNoYyHcE04RpBLn6zZlRlcm7gAiCnPeMuxWwdsSut/sLsv/T4t0qjSB0U3dxdVyfzijtZyZPmiqx+V1g==}
+
+snapshots:
+
+  express-error-toolkit@1.2.1:
+    dependencies:
+      http-status-toolkit: 1.0.3
+
+  http-status-toolkit@1.0.3: {}
+
+  http-status-toolkit@2.0.0: {}
