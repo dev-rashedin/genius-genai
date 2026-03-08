@@ -1,9 +1,11 @@
 import readline from "node:readline/promises";
 
-import { createAgent, tool, humanInTheLoopMiddleware } from "langchain";
+import { createAgent, humanInTheLoopMiddleware } from "langchain";
 import { ChatGroq } from "@langchain/groq"
-import { gmailEmails } from "./constants/emails.js";
-import { MemorySaver } from "@langchain/langgraph";
+import { MemorySaver, Command } from "@langchain/langgraph";
+import { getEmails, refund } from "./tools.js";
+import {marked} from 'marked'
+import TerminalRenderer from 'marked-terminal';
 
 const llm = new ChatGroq({
     model: "openai/gpt-oss-120b",
@@ -33,26 +35,43 @@ async function main(){
     input: process.stdin,
     output: process.stdout
   })
-  const interrupts = []
+
+  let interrupts = [];
 
   while(true){
 
-    const query = await rl.question("You: ");
+  const query = await rl.question("You: ");
 
+  if(query === '/bye') break;
 
-  const response = await agent.invoke(
-    {
-      messages: [
-        { role: "user", content: query 
-        }
-      ],
-    },
-    {  configurable: { thread_id: "1" }}
-)
+    const response = await agent.invoke(
+      interrupts.length
+        ? new Command({
+            resume: {
+              [interrupts?.[0]?.id]: {
+                decisions: [{ type: query === '1' ? 'approve' : 'reject' }],
+              },
+            },
+          })
+        : {
+            messages: [
+              {
+                role: 'user',
+                content: query,
+              },
+            ],
+          },
+      { configurable: { thread_id: '1' } }
+    );
 
+interrupts = [];
+
+  const formatted = marked.setOptions({
+      renderer: new TerminalRenderer(),
+    });
 
 let output = ""
-if(response?.__interrupt__.length){
+if(response?.__interrupt__?.length){
   interrupts.push(response.__interrupt__[0])
 
   output += response.__interrupt__[0].value.actionRequests[0].description + "\n\n";
@@ -64,14 +83,13 @@ if(response?.__interrupt__.length){
         .map((decision, idx) => `${idx + 1}. ${decision}`)
         .join('\n');
 } else {
-
+  output += response.messages[response.messages.length - 1].content;
 }
 
-console.log(output);
+console.log(formatted(output));
   }
 
-
-
+  rl.close();
 }
 
 main()

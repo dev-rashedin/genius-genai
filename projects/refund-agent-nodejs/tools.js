@@ -1,6 +1,8 @@
+import * as z from "zod";
+import { gmailEmails } from './constants/emails.js';
+import { tool } from "langchain";
 
-
-const getEmails = tool(
+export const getEmails = tool(
   () => {
     // todo: access Gmail apis
     return JSON.stringify(gmailEmails)
@@ -11,7 +13,7 @@ const getEmails = tool(
   },
 );
 
-const refund = tool(
+export const refund = tool(
   ({emails}) => {
     // todo: access backend apis
       return '✅ All refunds processed succesfully!';
@@ -24,3 +26,4 @@ const refund = tool(
     }),
   },
 );
+

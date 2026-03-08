@@ -31,3 +31,11 @@ Choose:
 2. reject
 
 `
+
+const obj = {
+  resume : {
+    'interruptId' : {decisions: [{type: 'approve'}]}
+  }
+}
+
+ resume[interrupt.id] = { decisions: [{ type: "approve" }] };
