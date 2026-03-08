@@ -50,6 +50,10 @@ const agent = createAgent({
   checkpointer: new MemorySaver(),
 });
 
+async function main(){
+  
+}
+
 const response = await agent.invoke(
     {
       messages: [
