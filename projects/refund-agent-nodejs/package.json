@@ -15,6 +15,8 @@
     "@langchain/core": "^1.0.2",
     "@langchain/groq": "^1.0.0",
     "@langchain/langgraph": "^1.0.1",
+    "express-error-toolkit": "^1.2.1",
+    "http-status-toolkit": "^2.0.0",
     "langchain": "^1.0.2",
     "marked": "^16.4.1",
     "marked-terminal": "^7.3.0",
