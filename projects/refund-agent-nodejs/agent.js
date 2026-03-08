@@ -1,5 +1,5 @@
 import readline from "node:readline/promises";
-import * as z from "zod";
+
 import { createAgent, tool, humanInTheLoopMiddleware } from "langchain";
 import { ChatGroq } from "@langchain/groq"
 import { gmailEmails } from "./constants/emails.js";
@@ -13,30 +13,7 @@ const llm = new ChatGroq({
     // other params...
 })
 
-const getEmails = tool(
-  () => {
-    // todo: access Gmail apis
-    return JSON.stringify(gmailEmails)
-  },
-  {
-    name: "get_emails",
-    description: "Get the emails from inbox",
-  },
-);
 
-const refund = tool(
-  ({emails}) => {
-    // todo: access backend apis
-      return '✅ All refunds processed succesfully!';
-  },
-  {
-    name: "refund",
-    description: "Process the refund for given email",
-    schema: z.object({
-      emails: z.array(z.string()).describe("The list of the emails which need to be refunded"),
-    }),
-  },
-);
 
 
 const agent = createAgent({
@@ -52,12 +29,21 @@ const agent = createAgent({
 });
 
 async function main(){
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
   const interrupts = []
+
+  while(true){
+
+    const query = await rl.question("You: ");
+
 
   const response = await agent.invoke(
     {
       messages: [
-        { role: "user", content: "Hey, is there any refund   request? I wanted to refund them asap" 
+        { role: "user", content: query 
         }
       ],
     },
@@ -82,6 +68,9 @@ if(response?.__interrupt__.length){
 }
 
 console.log(output);
+  }
+
+
 
 }
 
